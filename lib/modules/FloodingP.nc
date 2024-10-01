@@ -3,7 +3,7 @@
 #include "../../includes/NeighborTable.h"
 #include "../../includes/sendInfo.h"
 #include "../../includes/am_types.h"
-#include "protocol.h"
+#include "../../includes/protocol.h"
 
 module FloodingP {
      provides interface Flooding;
@@ -14,7 +14,7 @@ module FloodingP {
 
     uses interface Receive as Receiver;
 
-    // uses interface NeighborDiscovery as Neighbor;
+    //  uses interface NeighborDiscovery as Neighbor;
 
     
 
