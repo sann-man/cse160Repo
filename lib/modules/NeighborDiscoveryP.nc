@@ -85,13 +85,13 @@ implementation {
         }
     }
 
-    // void get(neighbor_t* table, uint8_t* countPtr){
-    //     uint8_t i;
-    //     for (i = 0; i < *countPtr; i++) { 
-    //         return table[i];
-    //     }
+    neighbor_t get(neighbor_t* table, uint8_t* countPtr){
+        uint8_t i;
+        for (i = 0; i < *countPtr; i++) { 
+            return table[i];
+        }
 
-    // }
+    }
 
     // ------- Remove neighbors that are no longer active  -----------//
     // marks the neighbor as inactive 
@@ -114,11 +114,11 @@ implementation {
         
     }
 
-    // command void NeighborDiscovery.getNeighbor(neighbor_t* tableFlood){
+    command void NeighborDiscovery.getNeighbor(neighbor_t* tableFlood){
 
-    //     get(tableFlood, &count);
+        get(tableFlood, &count);
 
 
-    // }
+    }
 
 }

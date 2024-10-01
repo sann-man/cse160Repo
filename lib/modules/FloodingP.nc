@@ -25,7 +25,7 @@ implementation {
     pack sendFlood;
     uint16_t sequenceNum = 0;
 
-    // neighbor_t neighborTable[MAX_NEIGHBORS]; 
+     neighbor_t neighborTable[MAX_NEIGHBORS]; 
 
 
     command void Flooding.pass() {
@@ -37,7 +37,7 @@ implementation {
     }
 
     command void Flooding.start(){
-        // call Neighbor.getNeighbor(neighborTable); //I want to get neighbor table to use 
+        call Neigh.getNeighbor(neighborTable); //I want to get neighbor table to use 
     }
 
     

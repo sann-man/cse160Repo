@@ -18,6 +18,6 @@ typedef struct {
 // Function prototypes
 void addNeighbor(neighbor_t* table, uint8_t* count, uint16_t id, uint8_t quality);
 void removeNeighbor(neighbor_t* table, uint8_t* count, uint16_t id);
-// void get(neighbor_t* table, uint8_t* count);
+ void get(neighbor_t* table, uint8_t* count);
 
 #endif // NEIGHBOR_TABLE_H
