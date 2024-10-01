@@ -29,6 +29,7 @@ module Node{
 
 implementation{
    pack sendPackage;
+   pack floodMsg;
 
    // Prototypes
       void makePack(pack *Package, uint16_t src, uint16_t dest, uint16_t TTL, uint16_t Protocol, uint16_t seq, uint8_t *payload, uint8_t length);
@@ -41,17 +42,29 @@ implementation{
       // neighbor discovery start 
       if (call NeighborDiscovery.start() == SUCCESS) { 
          dbg("NeighborDiscovery", "NeighborDiscovery start command was successful.\n");
-      } 
-      else {
+      } else {
         dbg("NeighborDiscovery", "NeighborDiscovery start command failed.\n");
       }
 
       if (call Flooding.start() == SUCCESS) { 
          dbg("Flooding", "Flooding start command was successful.\n");
-      } 
-      else {
+      } else {
         dbg("Flooding", "Flooding start command failed.\n");
       }
+
+      floodMsg.src = TOS_NODE_ID;
+      floodMsg.dest = 10; // Example destination node
+      floodMsg.TTL = 20;  // Example TTL value
+      floodMsg.protocol = PROTOCOL_PING;  // Example protocol
+      memcpy(floodMsg.payload, "Flooding message", 16);  // Example payload
+
+      // Call Flooding.send() with the message and destination
+      if (call Flooding.send(floodMsg, floodMsg.dest) == SUCCESS) {
+         dbg(FLOODING_CHANNEL, "Flooding started successfully.\n");
+      } else {
+         dbg(FLOODING_CHANNEL, "Failed to start flooding.\n");
+      }
+   
       
    }
 
