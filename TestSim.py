@@ -20,7 +20,7 @@ class TestSim:
 
     # Project 1
     NEIGHBOR_CHANNEL="NeighborDiscovery";
-    FLOODING_CHANNEL="flooding";
+    FLOODING_CHANNEL="Flooding";
 
     # Project 2
     ROUTING_CHANNEL="routing";
@@ -137,7 +137,8 @@ def main():
     s.bootAll()
     s.addChannel(s.COMMAND_CHANNEL)
     s.addChannel(s.GENERAL_CHANNEL) 
-    s.addChannel(s.NEIGHBOR_CHANNEL) 
+    s.addChannel(s.NEIGHBOR_CHANNEL)
+    s.addChannel(s.FLOODING_CHANNEL) 
 
     # run for a short time to see boot output
     s.runTime(10)

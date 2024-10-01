@@ -1,5 +1,6 @@
 interface Flooding {
     command void pass();
-    command void start();
+    command error_t start();
+    
 
 }

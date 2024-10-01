@@ -65,6 +65,7 @@ implementation {
         uint8_t i; 
         for (i = 0; i < *countPtr; i++) { 
             if (table[i].neighborID == id) { 
+                table[i].nodeID = TOS_NODE_ID;
                 table[i].neighborID = id;
                 table[i].linkQuality = quality; 
                 table[i].isActive = ACTIVE; 
@@ -75,6 +76,7 @@ implementation {
         // Add new neighbor if table is not yet full
         if (*countPtr < MAX_NEIGHBORS) {
             // Add new neighbor at the available slot
+            table[*countPtr].nodeID = TOS_NODE_ID;
             table[*countPtr].neighborID = id;
             table[*countPtr].linkQuality = quality;
             table[*countPtr].isActive = ACTIVE;
@@ -89,6 +91,7 @@ implementation {
         uint8_t i;
         for (i = 0; i < *countPtr; i++) { 
             return table[i];
+            // dbg("NeighborDiscovery", "Transferring Items\n");
         }
 
     }

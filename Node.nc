@@ -45,6 +45,13 @@ implementation{
       else {
         dbg("NeighborDiscovery", "NeighborDiscovery start command failed.\n");
       }
+
+      if (call Flooding.start() == SUCCESS) { 
+         dbg("Flooding", "Flooding start command was successful.\n");
+      } 
+      else {
+        dbg("Flooding", "Flooding start command failed.\n");
+      }
       
    }
 

@@ -10,6 +10,7 @@
 
 // Define the structure for neighbor information
 typedef struct {
+    uint16_t nodeID;
     uint16_t neighborID;  // ID of the neighbor
     uint16_t linkQuality;  // Link quality (0-255)
     uint16_t isActive;     // Status of the link (ACTIVE/INACTIVE)
@@ -18,6 +19,7 @@ typedef struct {
 // Function prototypes
 void addNeighbor(neighbor_t* table, uint8_t* count, uint16_t id, uint8_t quality);
 void removeNeighbor(neighbor_t* table, uint8_t* count, uint16_t id);
- void get(neighbor_t* table, uint8_t* count);
+void get(neighbor_t* table, uint8_t* count);
+void neighborFlood(uint8_t nodeID);
 
 #endif // NEIGHBOR_TABLE_H
