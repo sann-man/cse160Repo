@@ -14,7 +14,7 @@ module FloodingP {
 
     uses interface Receive as Receiver;
 
-    //  uses interface NeighborDiscovery as Neighbor;
+    uses interface NeighborDiscovery as Neigh;
 
     
 

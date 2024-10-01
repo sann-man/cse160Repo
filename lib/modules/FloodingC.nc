@@ -5,9 +5,9 @@ configuration FloodingC {
 }
 
 implementation {
-    components FloodingP;
+    components FloodingP, NeighborDiscoveryC as Neigh;
     Flooding = FloodingP.Flooding;
 
-    // components new NeighborDiscoveryC() as Neighbor;
-    // Flooding.Neighbor -> Neighbor;
+    // , components NeighborDiscoveryC as N;
+    FloodingP.Neigh -> Neigh;
 }
