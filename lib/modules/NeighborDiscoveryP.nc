@@ -15,19 +15,15 @@ implementation {
     uint8_t count = 0;
     bool neighborDiscoveryStarted = FALSE;
     uint16_t sequenceNumber = 0;
-    
-    #define MAX_TTL 1
-    #define NEIGHBOR_TIMEOUT 300000 // time that node can be INACTIVE for before being removed
-    #define QUALITY_THRESHOLD 50 // min quality amount for neighbor to be active
-    #define QUALITY_INCREMENT 10
-    #define QUALITY_DECREMENT 5 // used when node not seen
+    uint8_t discoveryCount = 0; // for LS
+    // moved define to nt.h 
 
     // function prototypes 
     void checkInactiveNeighbors();
     void addNeighbor(uint16_t id, uint8_t quality);
 
     command error_t NeighborDiscovery.start() {
-        uint32_t offset;
+        uint32_t offset; // 
         neighborDiscoveryStarted = TRUE; 
         dbg(NEIGHBOR_CHANNEL, "NeighborDiscovery started\n");
         
@@ -56,6 +52,8 @@ implementation {
     event void NeighborDiscoveryTimer.fired() {
         dbg(NEIGHBOR_CHANNEL, "Sending discovery packet\n");
         
+        discoveryCount++; 
+
         sendPackage.src = TOS_NODE_ID;
         sendPackage.dest = AM_BROADCAST_ADDR;
         sendPackage.seq = sequenceNumber++;
@@ -69,6 +67,10 @@ implementation {
             dbg(NEIGHBOR_CHANNEL, "Failed to send discovery packet\n");
         }
 
+        if(discoveryCount >= 5){  // added for LS (discoveryCount)
+            dbg("NeighborDiscovery", "Neighbor Discovery Complete\n");
+            signal NeighborDiscovery.done();
+        }
         checkInactiveNeighbors(); // checks neighbors and update
     }
 

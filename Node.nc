@@ -15,6 +15,7 @@ module Node {
    uses interface NeighborDiscovery;
    uses interface Flooding;
    uses interface Timer<TMilli> as NeighborDiscoveryTimer;
+   uses interface LinkState; 
 }
 
 implementation {
@@ -43,6 +44,13 @@ implementation {
          dbg("Flooding", "Flooding start command failed.\n");
       }
 
+      // LinkState start
+      if (call LinkState.start() == SUCCESS) {
+         dbg(ROUTING_CHANNEL, "LinkState start command was successful.\n");
+      } else {
+         dbg(ROUTING_CHANNEL, "LinkState start command failed.\n");
+      }
+
       // Start the neighbor discovery timer
       call NeighborDiscoveryTimer.startPeriodic(50000);
    }
@@ -54,6 +62,11 @@ implementation {
          //Retry until successful
          call AMControl.start();
       }
+   }
+
+   event void NeighborDiscovery.done(){
+      dbg(GENERAL_CHANNEL, "Neighbor Discovery DONE\n");
+      // LinkState.floodLSA();
    }
 
    event void AMControl.stopDone(error_t err) {}

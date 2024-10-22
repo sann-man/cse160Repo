@@ -16,27 +16,23 @@ implementation {
     components MainC;
     components Node;
     components new AMReceiverC(AM_PACK) as GeneralReceive;
+    components ActiveMessageC;
+    components new SimpleSendC(AM_PACK);
+    components CommandHandlerC;
+    components FloodingC; 
+    components NeighborDiscoveryC;
+    components new TimerMilliC() as NeighborDiscoveryTimer;
+    components LinkStateC; 
+
 
     Node -> MainC.Boot;
-
     Node.Receive -> GeneralReceive;
-
-    components ActiveMessageC;
     Node.AMControl -> ActiveMessageC;
-
-    components new SimpleSendC(AM_PACK);
     Node.Sender -> SimpleSendC;
-
-    components CommandHandlerC;
     Node.CommandHandler -> CommandHandlerC;
-
-    components NeighborDiscoveryC;
     Node.NeighborDiscovery -> NeighborDiscoveryC;
-
-    components FloodingC; 
     Node.Flooding -> FloodingC; 
-
+    Node.LinkState -> LinkStateC; 
     // Add the NeighborDiscoveryTimer
-    components new TimerMilliC() as NeighborDiscoveryTimer;
     Node.NeighborDiscoveryTimer -> NeighborDiscoveryTimer;
 }
