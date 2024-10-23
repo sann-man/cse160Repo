@@ -136,24 +136,31 @@ def main():
     s.loadNoise("no_noise.txt")
     s.bootAll()
     s.addChannel(s.COMMAND_CHANNEL)
-    s.addChannel(s.GENERAL_CHANNEL) 
+    s.addChannel(s.GENERAL_CHANNEL)
     # s.addChannel(s.NEIGHBOR_CHANNEL)
-
-    # s.runTime(10)
-    # s.addChannel(s.FLOODING_CHANNEL) 
+    # s.addChannel(s.FLOODING_CHANNEL)
     s.addChannel(s.ROUTING_CHANNEL)
 
-    # run for a short time to see boot output
-    s.runTime(10)
-    print("All nodes have been booted and channels added.")
-    
-    #send a command or ping to check for response
-    s.ping(1,2 , "Hello, World")
-    s.runTime(10)
-    s.ping(1, 3, "Hi!") #not recieved because no neighbor
+    # Run for a while to let network establish
     s.runTime(20)
+    print("Network setup phase complete - starting commands")
 
+    # Test neighbor discovery - This sends the neighbor dump command
+    s.neighborDMP(1)  # Print neighbors for node 1
+    s.runTime(10)     # Give time for response
     
+    # Test routing table - This sends the route dump command
+    s.routeDMP(1)     # Print route table for node 1
+    s.runTime(10)     # Give time for response
+
+    # Try another node
+    s.neighborDMP(2)  # Print neighbors for node 2
+    s.runTime(10)
+    s.routeDMP(2)     # Print route table for node 2
+    s.runTime(10)
+
+    s.ping(1, 2, "Hello, World")
+    s.runTime(10)
 
 if __name__ == '__main__':
     main()

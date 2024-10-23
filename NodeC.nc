@@ -22,7 +22,11 @@ implementation {
     components FloodingC; 
     components NeighborDiscoveryC;
     components new TimerMilliC() as NeighborDiscoveryTimer;
+    
+
+    // 2
     components LinkStateC; 
+    components IPC; 
 
 
     Node -> MainC.Boot;
@@ -30,9 +34,13 @@ implementation {
     Node.AMControl -> ActiveMessageC;
     Node.Sender -> SimpleSendC;
     Node.CommandHandler -> CommandHandlerC;
+    // 1
     Node.NeighborDiscovery -> NeighborDiscoveryC;
     Node.Flooding -> FloodingC; 
+    // 2 
     Node.LinkState -> LinkStateC; 
+    Node.IP -> IPC; 
+    
     // Add the NeighborDiscoveryTimer
     Node.NeighborDiscoveryTimer -> NeighborDiscoveryTimer;
 }
